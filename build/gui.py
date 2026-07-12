@@ -156,7 +156,7 @@ create_rounded_rectangle(
     -9.0,
     0.0,
     423.0,
-    801.0,
+    778.0,
     10.0,
     fill="#FFFFFF",
     outline="")
@@ -172,10 +172,10 @@ button_1 = ImageButton(
     relief="flat"
 )
 button_1.place(
-    x=58.0,
-    y=693.0,
-    width=311.0,
-    height=62.0
+    x=53.0,
+    y=679.0,
+    width=321.0,
+    height=76.0
 )
 
 canvas.create_rectangle(
@@ -195,6 +195,14 @@ create_rounded_rectangle(
     10.0,
     fill="#D0C5F4",
     outline="")
+
+image_image_1 = load_photo_image(
+    relative_to_assets("element_1.png"))
+image_1 = canvas.create_image(
+    212.0,
+    114.0,
+    image=image_image_1
+)
 
 button_image_2 = load_photo_image(
     relative_to_assets("button_2.png"))
@@ -225,7 +233,7 @@ button_3 = ImageButton(
 )
 button_3.place(
     x=45.0,
-    y=477.0,
+    y=478.0,
     width=70.0,
     height=75.0
 )
@@ -242,7 +250,7 @@ button_4 = ImageButton(
 )
 button_4.place(
     x=188.0,
-    y=477.0,
+    y=478.0,
     width=70.0,
     height=75.0
 )
@@ -361,7 +369,7 @@ button_11 = ImageButton(
 )
 button_11.place(
     x=189.0,
-    y=301.0,
+    y=302.0,
     width=70.0,
     height=75.0
 )
@@ -378,7 +386,7 @@ button_12 = ImageButton(
 )
 button_12.place(
     x=45.0,
-    y=301.0,
+    y=302.0,
     width=70.0,
     height=75.0
 )
@@ -412,7 +420,7 @@ button_14 = ImageButton(
 )
 button_14.place(
     x=116.0,
-    y=477.0,
+    y=478.0,
     width=70.0,
     height=75.0
 )
@@ -429,7 +437,7 @@ button_15 = ImageButton(
 )
 button_15.place(
     x=116.0,
-    y=388.0,
+    y=389.0,
     width=70.0,
     height=75.0
 )
@@ -446,7 +454,7 @@ button_16 = ImageButton(
 )
 button_16.place(
     x=117.0,
-    y=301.0,
+    y=302.0,
     width=70.0,
     height=75.0
 )
