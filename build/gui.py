@@ -135,16 +135,16 @@ enable_dpi_awareness()
 window = Tk()
 apply_theme(window)
 
-window.geometry("366x627")
+window.geometry("423x778")
 window.configure(bg="#FFFFFF")
-center_window(window, 366, 627)
+center_window(window, 423, 778)
 
 
 canvas = Canvas(
     window,
     bg="#FFFFFF",
-    height=627,
-    width=366,
+    height=778,
+    width=423,
     bd=0,
     highlightthickness=0,
     relief="ridge"
@@ -155,8 +155,8 @@ create_rounded_rectangle(
     canvas,
     -9.0,
     0.0,
-    374.0,
-    638.0,
+    423.0,
+    801.0,
     10.0,
     fill="#FFFFFF",
     outline="")
@@ -172,25 +172,25 @@ button_1 = ImageButton(
     relief="flat"
 )
 button_1.place(
-    x=31.0,
-    y=529.0,
-    width=301.0,
-    height=98.0
+    x=58.0,
+    y=693.0,
+    width=311.0,
+    height=62.0
 )
 
 canvas.create_rectangle(
-    4.0,
+    36.0,
     188.0,
-    360.0000166239679,
+    392.0000166239679,
     190.00000003774764,
     fill="#F3F3F3",
     outline="")
 
 create_rounded_rectangle(
     canvas,
+    12.0,
     0.0,
-    0.0,
-    366.0,
+    412.0,
     168.0,
     10.0,
     fill="#D0C5F4",
@@ -207,10 +207,10 @@ button_2 = ImageButton(
     relief="flat"
 )
 button_2.place(
-    x=32.0,
-    y=218.0,
-    width=60.0,
-    height=60.0
+    x=188.0,
+    y=388.0,
+    width=70.0,
+    height=75.0
 )
 
 button_image_3 = load_photo_image(
@@ -224,10 +224,10 @@ button_3 = ImageButton(
     relief="flat"
 )
 button_3.place(
-    x=104.0,
-    y=218.0,
-    width=60.0,
-    height=60.0
+    x=45.0,
+    y=477.0,
+    width=70.0,
+    height=75.0
 )
 
 button_image_4 = load_photo_image(
@@ -241,10 +241,10 @@ button_4 = ImageButton(
     relief="flat"
 )
 button_4.place(
-    x=32.0,
-    y=298.0,
-    width=60.0,
-    height=60.0
+    x=188.0,
+    y=477.0,
+    width=70.0,
+    height=75.0
 )
 
 button_image_5 = load_photo_image(
@@ -258,10 +258,10 @@ button_5 = ImageButton(
     relief="flat"
 )
 button_5.place(
-    x=104.0,
-    y=298.0,
-    width=60.0,
-    height=60.0
+    x=116.0,
+    y=565.0,
+    width=70.0,
+    height=75.0
 )
 
 button_image_6 = load_photo_image(
@@ -275,10 +275,10 @@ button_6 = ImageButton(
     relief="flat"
 )
 button_6.place(
-    x=176.0,
-    y=298.0,
-    width=60.0,
-    height=60.0
+    x=322.0,
+    y=467.0,
+    width=70.0,
+    height=90.0
 )
 
 button_image_7 = load_photo_image(
@@ -292,10 +292,10 @@ button_7 = ImageButton(
     relief="flat"
 )
 button_7.place(
-    x=31.0,
-    y=368.0,
-    width=60.0,
-    height=60.0
+    x=322.0,
+    y=385.0,
+    width=70.0,
+    height=87.0
 )
 
 button_image_8 = load_photo_image(
@@ -309,10 +309,10 @@ button_8 = ImageButton(
     relief="flat"
 )
 button_8.place(
-    x=103.0,
-    y=368.0,
-    width=60.0,
-    height=61.0
+    x=322.0,
+    y=303.0,
+    width=70.0,
+    height=88.0
 )
 
 button_image_9 = load_photo_image(
@@ -326,10 +326,10 @@ button_9 = ImageButton(
     relief="flat"
 )
 button_9.place(
-    x=175.0,
-    y=368.0,
-    width=60.0,
-    height=61.0
+    x=322.0,
+    y=221.0,
+    width=70.0,
+    height=90.0
 )
 
 button_image_10 = load_photo_image(
@@ -343,10 +343,10 @@ button_10 = ImageButton(
     relief="flat"
 )
 button_10.place(
-    x=31.0,
-    y=438.0,
-    width=61.0,
-    height=60.0
+    x=45.0,
+    y=388.0,
+    width=70.0,
+    height=75.0
 )
 
 button_image_11 = load_photo_image(
@@ -360,10 +360,10 @@ button_11 = ImageButton(
     relief="flat"
 )
 button_11.place(
-    x=103.0,
-    y=438.0,
-    width=60.0,
-    height=60.0
+    x=189.0,
+    y=301.0,
+    width=70.0,
+    height=75.0
 )
 
 button_image_12 = load_photo_image(
@@ -377,10 +377,10 @@ button_12 = ImageButton(
     relief="flat"
 )
 button_12.place(
-    x=175.0,
-    y=437.0,
-    width=60.0,
-    height=61.0
+    x=45.0,
+    y=301.0,
+    width=70.0,
+    height=75.0
 )
 
 button_image_13 = load_photo_image(
@@ -394,10 +394,10 @@ button_13 = ImageButton(
     relief="flat"
 )
 button_13.place(
-    x=103.0,
-    y=507.0,
-    width=61.0,
-    height=61.0
+    x=45.0,
+    y=211.0,
+    width=70.0,
+    height=75.0
 )
 
 button_image_14 = load_photo_image(
@@ -411,10 +411,10 @@ button_14 = ImageButton(
     relief="flat"
 )
 button_14.place(
-    x=272.0,
-    y=467.0,
-    width=60.0,
-    height=82.0
+    x=116.0,
+    y=477.0,
+    width=70.0,
+    height=75.0
 )
 
 button_image_15 = load_photo_image(
@@ -428,10 +428,10 @@ button_15 = ImageButton(
     relief="flat"
 )
 button_15.place(
-    x=272.0,
-    y=385.0,
-    width=60.0,
-    height=79.0
+    x=116.0,
+    y=388.0,
+    width=70.0,
+    height=75.0
 )
 
 button_image_16 = load_photo_image(
@@ -445,10 +445,10 @@ button_16 = ImageButton(
     relief="flat"
 )
 button_16.place(
-    x=272.0,
-    y=303.0,
-    width=60.0,
-    height=82.0
+    x=117.0,
+    y=301.0,
+    width=70.0,
+    height=75.0
 )
 
 button_image_17 = load_photo_image(
@@ -462,10 +462,10 @@ button_17 = ImageButton(
     relief="flat"
 )
 button_17.place(
-    x=272.0,
-    y=221.0,
-    width=60.0,
-    height=82.0
+    x=120.0,
+    y=211.0,
+    width=73.0,
+    height=75.0
 )
 window.resizable(False, False)
 
