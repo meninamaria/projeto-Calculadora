@@ -1,130 +1,241 @@
 from pathlib import Path
 from PyQt5 import uic, QtWidgets
 
-buffer = 0
-temporary = 0
-dis = ""
+display = []
 calc = []
+count = 0
+aux = 0
+negativo = 0
+operador = ''
+operador2 = ''
+passos = 0
 
-def add():
-    global buffer,dis
 
-    # buffer = num1+num2
-    # return num1+num2
-    dis+='+'
-    calculadora.display.setText(dis)
+# mostrar os valores na tela da calculadora
+def print_screen(button=0):
+    global display,passos
+    screen = ''
 
-def sub(num1, num2):
-    global buffer
-    buffer = num1-num2
-    return num1-num2
+    # verificar se existe elementos na lista
+    if len(display) >= 1:
+        # apagar o último elemento
+        if button==1:
+            for j in range(0, len(display)):
+                if j!=0:
+                    if display[j] in '1234567890':
+                        if display[j-1] in '+-×÷':
+                            passos-=1
+            del display[-1]
+            if len(calc) >= 1:
+                del calc[-1]
+        else:
+            for j in range(0, len(display)):
+                if j!=0:
+                    if display[j] in '+-×÷':
+                        if display[j-1] in '+-×÷':
+                            del display[j]
+                            passos-=1
 
-def mult(num1,num2):
-    global buffer
-    buffer = num1*num2
-    return num1*num2
+    for i in range(0, len(display)):
+        screen += display[i]
+        
+    calculadora.display.setText(screen)
 
-def div(num1,num2):
-    global buffer
-    buffer = num1/num2
-    return num1/num2
+     
+# aqui é pra pegar o número que está na lista DISPLAY e colocar na variável AUX para que os valores sejam armazenados
+def numbers():
+    global aux, display, count, passos, negativo, calc, operador2, operador
+
+    for j in range(0, len(display)):
+        if count == 0:
+            if display[0] == '-':
+                negativo=1
+        if j!=0:
+            if display[j] == '-':
+                if display[j-1] == '+' or display[j-1] == '×' or display[j-1] == '÷':
+                    if display[j-1] == '÷':
+                        operador2='/'
+                    elif display[j-1] == '×':
+                        operador2='*'
+                    else:
+                        operador2 = display[j-1]
+
+                    operador = operador2
+                    negativo=1
+                    passos=1
+
+    
+    for i in range(0, len(calc)):
+        if calc[i] == '+' or calc[i] == '-' or calc[i] == '×' or calc[i] == '÷' :
+            del calc[i]
+
+
+    if len(calc) >= 1:
+        aux = ''.join(calc)
+        if count == 0:
+            if negativo==1:
+                count = float(aux)*(-1)
+                negativo=0
+            else:
+                count = float(aux)
+        else:
+            if negativo==1:
+                aux = float(aux)*(-1)
+                negativo=0
+            else:
+                aux = float(aux)
+
+        passos+=1
+        
+    calc=[]
+
+
+# aqui é onde tem as operations
+def operations_math(operador):
+    global count, aux, passos
+
+    if passos == 3:
+        if operador == '+':
+            count += aux
+            calculadora.display.setText(str(count))
+        if operador == '-':
+            count -= aux
+            calculadora.display.setText(str(count))
+        if operador == '*':
+            count *= aux
+            calculadora.display.setText(str(count))
+        if operador == '/':
+            if aux == 0:
+                calculadora.display.setText("Cannot divide by zero")
+                count = 0
+                aux = 0
+                operador = ''
+            else:
+                count /= aux
+                calculadora.display.setText(str(count))
+        if operador == '=':
+            calculadora.display.setText(str(count))   
+
+        passos = 0
+          
 
 def button_clicked(button):
-    global buffer,dis,clicks, calc, temporary
+    global display, operador, passos, count, aux, count_operador, calc, negativo
     if button=="1":
-        calc.append(str(1))
-        dis+='1'
-        calculadora.display.setText(dis)
-
+        display.append(str('1'))
+        calc.append(str('1'))
+        print_screen()
+        
     elif button=='2':
-        calc.append(str(2))        
-        dis+='2'
-        calculadora.display.setText(dis)
+        display.append(str('2'))
+        calc.append(str('2'))
+        print_screen()
 
     elif button=='3':
-        calc.append(str(3))        
-        dis+='3'
-        calculadora.display.setText(dis)
+        display.append(str('3'))
+        calc.append(str('3'))
+        print_screen()
 
     elif button=='4':
-        calc.append(str(4))        
-        dis+='4'
-        calculadora.display.setText(dis)
+        display.append(str('4'))
+        calc.append(str('4'))        
+        print_screen()
 
     elif button=='5':
-        calc.append(str(5))        
-        dis+='5'
-        calculadora.display.setText(dis)
+        display.append(str('5'))
+        calc.append(str('5'))
+        print_screen()
 
     elif button=='6':
-        calc.append(str(6))
-        dis+='6'
-        calculadora.display.setText(dis)
+        display.append(str('6'))
+        calc.append(str('6'))
+        print_screen()
 
     elif button=='7':
-        calc.append(str(7))        
-        dis+='7'
-        calculadora.display.setText(dis)
+        display.append(str('7'))
+        calc.append(str('7'))
+        print_screen()
 
     elif button=='8':
-        calc.append(str(8))        
-        dis+='8'
-        calculadora.display.setText(dis)
+        display.append(str('8'))
+        calc.append(str('8'))
+        print_screen()
 
     elif button=='9':
-        calc.append(str(9))        
-        dis+='9'
-        calculadora.display.setText(dis)
+        display.append(str('9'))
+        calc.append(str('9'))
+        print_screen()
 
     elif button=='0':
-        calc.append(str(0))
-        dis+='0'
-        calculadora.display.setText(dis)
+        display.append(str('0'))
+        calc.append(str('0'))
+        print_screen()
 
     elif button=='+':
-        calc.append(str('+'))        
-        dis+='+'
-        calculadora.display.setText(dis)
+        display.append(str('+'))
+        calc.append(str('+'))
+
+        print_screen()
+        operador = '+'
+        numbers()
+        passos+=1
+        if count != 0:
+            operations_math(operador)
 
     elif button=='-':
-        calc.append(str('-'))
-        dis+='-'
-        calculadora.display.setText(dis)
+        display.append(str('-'))
+        calc.append(str('-'))        
+        print_screen()
+        operador = '-'
+        numbers()
+        passos+=1
+        if count != 0:
+            operations_math(operador)
 
     elif button=='*':
-        calc.append(str('*'))        
-        dis+='×'
-        calculadora.display.setText(dis)
+        display.append(str('×'))
+        calc.append(str('×'))
+        print_screen()
+        operador = '*'
+        numbers()
+        passos+=1
+        if count != 0:
+            operations_math(operador)
 
     elif button=='/':
-        calc.append(str('/'))        
-        dis+='÷'
-        calculadora.display.setText(dis)  
+        display.append(str('÷'))
+        calc.append(str('÷'))
+        print_screen()
+        operador = '/'
+        numbers()
+        passos+=1
+        if count != 0:
+            operations_math(operador)
 
     elif button=='del':
-        buffer = 0
-        dis = ''
-        calculadora.display.setText(dis)   
+        display = []
+        calc = []
+        count = 0
+        aux = 0
+        negativo = 0
+        operador = ''
+        passos = 0
+        calculadora.display.setText('')   
 
     elif button=='x':
-        print("APAGAR O ULTIMO ELEMENTO")
-        # eu acho que tem ser lista
-    else:
-        calculadora.display.setText(buffer)   
+        print_screen(1)
 
-
-def verificar_calc():
-    global calc
-    # aqui é pra verificar se o último elemento é operador ou não
-    concat = ''
-    for i in range(0, len(calc)): 
-        # [1 , 1 , 1 , +]
-        if calc[-1]=='+' or calc[-1]=='-' or calc[-1]=='*' or calc[-1]=='/':
-            break
-        concat += str(calc[i])
-    
-    number = int(concat)
-    temporary = number
+    elif button=='=':
+        numbers()
+        if count != 0 and passos==3:
+            operations_math(operador)
+        else: 
+            passos+=1
+            operations_math(operador)
+        display = []
+        negativo = 0
+        operador = ''
+        passos = 0
 
 
 app = QtWidgets.QApplication([])
@@ -159,6 +270,3 @@ calculadora.button_equal.clicked.connect(lambda: button_clicked("="))
 
 calculadora.show()
 app.exec()
-
-
-
