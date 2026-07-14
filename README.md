@@ -1,6 +1,6 @@
 # Calculadora
 
-Esse projeto tem o intuito de aprendizado e treinar minhas habilidades em Python, além disso utilizando uma interface gráfica, o PyQt5-tools.
+Esse projeto tem o intuito de aprendizado e treinar minhas habilidades em **Python**, além disso utilizando uma interface gráfica, o **PyQt5-tools**.
 
 A calculadora desenvolvida está em fase inicial ainda, pois não implementei algumas funcionalidades como o uso dos parênteses, exponenciação, radiação, porcentagem ou trabalhar com números decimais.
 
