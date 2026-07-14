@@ -5,15 +5,17 @@ display = []
 calc = []
 count = 0
 aux = 0
+aux2 = 0
 negativo = 0
 operador = ''
 operador2 = ''
 passos = 0
+alterou = 1
 
 
 # mostrar os valores na tela da calculadora
 def print_screen(button=0):
-    global display,passos
+    global display, passos, operador, count, aux, calc, alterou, aux2
     screen = ''
 
     # verificar se existe elementos na lista
@@ -22,16 +24,68 @@ def print_screen(button=0):
         if button==1:
             for j in range(0, len(display)):
                 if j!=0:
+                    # aqui é pra ver se o usuário vai apagar um número ou operador
                     if display[j] in '1234567890':
                         if display[j-1] in '+-×÷':
-                            passos-=1
+                            break
+
+            if display[-1] in '+-×÷':
+                passos-=1
+
             del display[-1]
+
+            # aqui é quando o usuário que exclui todos os valores que estão na lista
+            if len(display) == 0:
+                operador=''
+                count = 0
+                aux = 0
+                passos = 0
+
             if len(calc) >= 1:
-                del calc[-1]
+                del calc[-1]     
+
+            # aqui é a atualização do COUNT quando os números e operadores são apagados (é pra ser né...)
+            calc=[]
+            aux2 = ''
+            if len(display) == 1:
+                if display[0] in '1234567890':
+                    calc.append(display[0]) 
+                    aux2+=display[0]
+                    alterou=1
+            else:
+                for i in range(0, len(display)):  
+                    if i != 0:
+                        if display[i] in '1234567890':
+                            if display[i-1] != '+' and display[i-1] != '-' and display[i-1] != '×' and display[i-1] != '÷':
+                                calc.append(display[i-1]) 
+                                aux2+=display[i-1]
+                                alterou=1
+
+                        if len(calc) == 0:
+                            calc.append(display[0]) 
+                            aux2+=display[0]
+                            alterou=1
+                            break
+                        
+                        if i == len(display)-1:
+                            if display[i] in '1234567890':
+                                calc.append(display[i]) 
+                                aux2+=display[i]
+                                alterou=1
+        
+            if alterou == 1:
+                count = float(aux2)
+                calc=[]
+                alterou=0
+                passos=1
+            
+
+        # quando o usuário não clica na opção de apagar o último elemento   
         else:
             for j in range(0, len(display)):
                 if j!=0:
-                    if display[j] in '+-×÷':
+                    # aqui é pra verificar se existem dois operadores em sequência (O QUE NÃO PODE ACONTECER)
+                    if display[j] in '+×÷':
                         if display[j-1] in '+-×÷':
                             del display[j]
                             passos-=1
@@ -50,19 +104,21 @@ def numbers():
         if count == 0:
             if display[0] == '-':
                 negativo=1
-        if j!=0:
-            if display[j] == '-':
-                if display[j-1] == '+' or display[j-1] == '×' or display[j-1] == '÷':
-                    if display[j-1] == '÷':
-                        operador2='/'
-                    elif display[j-1] == '×':
-                        operador2='*'
-                    else:
-                        operador2 = display[j-1]
+        if negativo==0: 
+            if j!=0:
+                if display[j] == '-':
+                    if display[j-1] == '+' or display[j-1] == '×' or display[j-1] == '÷':
+                        if display[j-1] == '÷':
+                            operador2='/'
+                        elif display[j-1] == '×':
+                            operador2='*'
+                        else:
+                            operador2 = display[j-1]
 
-                    operador = operador2
-                    negativo=1
-                    passos=1
+                        if operador == '':
+                            passos=1
+                        operador = operador2
+                        negativo=1
 
     
     for i in range(0, len(calc)):
@@ -72,7 +128,7 @@ def numbers():
 
     if len(calc) >= 1:
         aux = ''.join(calc)
-        if count == 0:
+        if count == 0 and passos == 0:
             if negativo==1:
                 count = float(aux)*(-1)
                 negativo=0
@@ -91,36 +147,48 @@ def numbers():
 
 
 # aqui é onde tem as operations
-def operations_math(operador):
-    global count, aux, passos
+def math(operador):
+    global count, aux, passos, display
 
-    if passos == 3:
-        if operador == '+':
-            count += aux
-            calculadora.display.setText(str(count))
-        if operador == '-':
-            count -= aux
-            calculadora.display.setText(str(count))
-        if operador == '*':
-            count *= aux
-            calculadora.display.setText(str(count))
-        if operador == '/':
-            if aux == 0:
-                calculadora.display.setText("Cannot divide by zero")
-                count = 0
-                aux = 0
-                operador = ''
-            else:
-                count /= aux
-                calculadora.display.setText(str(count))
-        if operador == '=':
-            calculadora.display.setText(str(count))   
 
-        passos = 0
+    if operador == '+':
+        count += aux
+        calculadora.display.setText(str(count))
+    if operador == '-':
+        count -= aux
+        calculadora.display.setText(str(count))
+    if operador == '*':
+        count *= aux
+        calculadora.display.setText(str(count))
+    if operador == '/':
+        if aux == 0:
+            calculadora.display.setText("Cannot divide by zero")
+            count = 0
+            aux = ''
+            operador = ''
+        else:
+            count /= aux
+            calculadora.display.setText(str(count))
+    if operador == '=':
+        calculadora.display.setText(str(count))   
+
+    passos = 0
+
+
+# diferenciar os números dos passos
+def operations_math():
+    global count, aux, passos, display
+
+    if passos == 4:
+        if display[0] == '-':
+            math(operador)
+    elif passos == 3:
+        math(operador)
+
           
 
 def button_clicked(button):
-    global display, operador, passos, count, aux, count_operador, calc, negativo
+    global display, operador, passos, count, aux, count_operador, calc, negativo, operador2
     if button=="1":
         display.append(str('1'))
         calc.append(str('1'))
@@ -174,43 +242,62 @@ def button_clicked(button):
     elif button=='+':
         display.append(str('+'))
         calc.append(str('+'))
-
         print_screen()
-        operador = '+'
+
         numbers()
+        operador = '+'
         passos+=1
+
         if count != 0:
-            operations_math(operador)
+            operations_math()
 
     elif button=='-':
         display.append(str('-'))
         calc.append(str('-'))        
         print_screen()
-        operador = '-'
+
         numbers()
-        passos+=1
+
+        if operador2 != '':
+            operador = operador2
+        else:
+            if len(display) == 2:
+                operador = '-'
+                passos+=1
+            else:
+                for i in range(0, len(display)):
+                    if i != 0:
+                        if display[i-1] in '1234567890':
+                            operador = '-'
+                            passos+=1
+                
+
         if count != 0:
-            operations_math(operador)
+            operations_math()
 
     elif button=='*':
         display.append(str('×'))
         calc.append(str('×'))
         print_screen()
-        operador = '*'
+
         numbers()
+        operador = '*'
         passos+=1
+
         if count != 0:
-            operations_math(operador)
+            operations_math()
 
     elif button=='/':
         display.append(str('÷'))
         calc.append(str('÷'))
         print_screen()
-        operador = '/'
+
         numbers()
+        operador = '/'
         passos+=1
+
         if count != 0:
-            operations_math(operador)
+            operations_math()
 
     elif button=='del':
         display = []
@@ -220,6 +307,7 @@ def button_clicked(button):
         negativo = 0
         operador = ''
         passos = 0
+
         calculadora.display.setText('')   
 
     elif button=='x':
@@ -227,14 +315,16 @@ def button_clicked(button):
 
     elif button=='=':
         numbers()
-        if count != 0 and passos==3:
-            operations_math(operador)
-        else: 
-            passos+=1
-            operations_math(operador)
+
+        operations_math()
+
         display = []
+        calc = []
+        count = 0
+        aux = 0
         negativo = 0
         operador = ''
+        operador2 = ''
         passos = 0
 
 
