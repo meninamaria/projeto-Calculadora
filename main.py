@@ -28,9 +28,10 @@ def print_screen(button=0):
                     if display[j] in '1234567890':
                         if display[j-1] in '+-×÷':
                             break
-
+                            
             if display[-1] in '+-×÷':
-                passos-=1
+                if negativo==0:
+                    passos-=1
 
             del display[-1]
 
@@ -77,7 +78,9 @@ def print_screen(button=0):
                 count = float(aux2)
                 calc=[]
                 alterou=0
-                passos=1
+                if negativo==0:
+                    passos=1
+
             
 
         # quando o usuário não clica na opção de apagar o último elemento   
