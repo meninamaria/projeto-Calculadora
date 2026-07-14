@@ -88,10 +88,14 @@ def print_screen(button=0):
             for j in range(0, len(display)):
                 if j!=0:
                     # aqui é pra verificar se existem dois operadores em sequência (O QUE NÃO PODE ACONTECER)
-                    if display[j] in '+×÷':
+                    if display[j] in '+-×÷':
                         if display[j-1] in '+-×÷':
+                            # caso tenha dois sinais sem ser o -
+                            if display[j] != '-':
+                                passos-=1
+
                             del display[j]
-                            passos-=1
+
 
     for i in range(0, len(display)):
         screen += display[i]
@@ -264,15 +268,16 @@ def button_clicked(button):
         if operador2 != '':
             operador = operador2
         else:
-            if len(display) == 2:
-                operador = '-'
-                passos+=1
-            else:
-                for i in range(0, len(display)):
-                    if i != 0:
-                        if display[i-1] in '1234567890':
-                            operador = '-'
-                            passos+=1
+            if operador == '':
+                if len(display) == 2:
+                    operador = '-'
+                    passos+=1
+                else:
+                    for i in range(0, len(display)):
+                        if i != 0:
+                            if display[i-1] in '1234567890':
+                                operador = '-'
+                                passos+=1
                 
 
         if count != 0:
@@ -302,7 +307,7 @@ def button_clicked(button):
         if count != 0:
             operations_math()
 
-    elif button=='del':
+    elif button=='CE':
         display = []
         calc = []
         count = 0
@@ -311,7 +316,7 @@ def button_clicked(button):
         operador = ''
         passos = 0
 
-        calculadora.display.setText('')   
+        calculadora.display.setText('0')   
 
     elif button=='x':
         print_screen(1)
@@ -356,7 +361,7 @@ calculadora.button_9.clicked.connect(lambda: button_clicked("9"))
 calculadora.button_0.clicked.connect(lambda: button_clicked("0"))
 
 # botoes de execucao
-calculadora.button_DEL.clicked.connect(lambda: button_clicked("del"))
+calculadora.button_CE.clicked.connect(lambda: button_clicked("CE"))
 calculadora.button_Apagar.clicked.connect(lambda: button_clicked("x"))
 calculadora.button_equal.clicked.connect(lambda: button_clicked("="))
 

@@ -421,7 +421,7 @@ color: rgb(255, 255, 255);</string>
     <string>+</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="button_DEL">
+  <widget class="QPushButton" name="button_CE">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -442,7 +442,7 @@ color: rgb(255, 255, 255);</string>
     <string notr="true">color: rgb(71, 32, 186);</string>
    </property>
    <property name="text">
-    <string>Del</string>
+    <string>CE</string>
    </property>
   </widget>
   <widget class="QPushButton" name="button_Apagar">
@@ -486,7 +486,7 @@ color: rgb(255, 255, 255);</string>
   <zorder>button_mult</zorder>
   <zorder>button_sub</zorder>
   <zorder>button_add</zorder>
-  <zorder>button_DEL</zorder>
+  <zorder>button_CE</zorder>
   <zorder>button_Apagar</zorder>
  </widget>
  <resources/>
